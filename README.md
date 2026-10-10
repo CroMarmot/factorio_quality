@@ -21,15 +21,14 @@ uvx hatch run note:lab
 ## 目录结构
 
 ```
-docs/theory/     纯理论 Markdown（无代码），含 LaTeX 公式
-notebooks/       混排文档：理论 + 代码 + 运行结果
-src/             模拟用的可复用 Python 包
+docs/theory/     符号约定、勘误与数值锚点（00-notation.md）+ 使用者手稿（01-math.md）
+notebooks/       唯一维护的文档：01_quality_theory.ipynb（理论三部分）+ 00_environment_check.ipynb
+src/             模拟用的可复用 Python 包（factorio_quality）
 tests/           数值验证测试
-scripts/         笔记本批量执行等辅助脚本
 ```
 
 ## 工作流
 
-1. `docs/theory/*.md` 中沉淀非参数化的基础理论（可由 jupytext 转入 notebook）。
-2. `notebooks/*.ipynb` 中给出带具体参数的模拟、折线图/散点图与具体数值。
-3. `pytest` + `ruff check .` 保证数值与代码正确。
+1. 理论与公式的唯一维护物是 `notebooks/01_quality_theory.ipynb`（Markdown + LaTeX，三部分：基础转移矩阵 / 纯回收机 / 组装+回收机），直接在 JupyterLab 中编辑。
+2. 符号约定、待确认问题与数值锚点见 `docs/theory/00-notation.md`；使用者手稿 `01-math.md` 原样保留。
+3. 后续在 notebook 中加入带具体参数的模拟代码与图表，可复用逻辑放 `src/factorio_quality`，用 `ruff check .` 保证代码风格。
